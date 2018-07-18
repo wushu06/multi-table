@@ -3,41 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Multiplication table</title>
+    <style>
+        tr:first-child, td:first-child {
+            background-color: #ccc;
+        }
+        td {
+            padding: 15px;
+        }
+    </style>
 </head>
 <body>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-    <input type="text" name="number" size="20" >   <br>
+    <label for="number">Number</label> <br>
+    <input title="number" type="text" name="number" size="20" >   <br>
     <input type="submit" name="table" value="get table">
 </form>
 
-<?php include 'Table.php'; ?>
 <?php
 
-$table = new Table();
-if( isset($_POST['number']) ):
-    echo $table->validation($_POST['number'], 'html');
+use Helper\Table;
 
+require_once 'helper/Table.php';
+?>
+<?php
 
-endif;
 /*
+ * Initialize the Table class
+ * pass $_POST request to be validated
+ * pass html to trigger the right function
+ */
+$table = new Table();
 
-if( isset($_POST['number']) ):
-    if(empty( $_POST['number']) ) {
-        echo 'Field can not be empty';
-        return;
-    }
-    if ( !is_numeric( $_POST['number'])  ) {
-        echo 'Input must be integer';
-        return;
-    }
-    echo $Table->html_output_generator($_POST['number']);
-
+if (isset($_POST['number'])) :
+    echo $table->validation($_POST['number'], 'html');
 endif;
-
-*/
-
-
-
 ?>
 </body>
 </html>
