@@ -18,6 +18,8 @@
  * @version   CVS: 1.0.0
  * @link      Null
  */
+declare(strict_types=1);
+
 
 namespace Helper;
 
@@ -46,7 +48,7 @@ class Table
      * @return   string $msg
      */
 
-    public function validation($value, $output = 'cli')
+    public function validation(int $value, string $output = 'cli') : string
     {
 
         $msg = '';
@@ -76,7 +78,7 @@ class Table
      * @return string $output which will be a table
      */
 
-    public function htmlOutputGenerator($POST)
+    public function htmlOutputGenerator(int $POST) : string
     {
 
 
@@ -116,7 +118,7 @@ class Table
      * @example php cli.php 5
      */
 
-    public function cliOutputGenerator($num)
+    public function cliOutputGenerator(int $num)
     {
 
         $cols    = $num;
@@ -131,11 +133,11 @@ class Table
                 } elseif ($row != 0) {
                     if ($col * $col == 1) {
                         // printf($mask, $col * $row);
-                        echo str_pad("\033[31m ".$col * $row, '10').'|';
+                        echo str_pad("\033[31m ".$col * $row, 10).'|';
                     } elseif ($row * $row == 1) {
-                        echo str_pad("\033[31m ".$col, '10').'|';
+                        echo str_pad("\033[31m ".$col, 10).'|';
                     } else {
-                        echo str_pad("\033[30m ".$col * $row, '10').'|';
+                        echo str_pad("\033[30m ".$col * $row, 10).'|';
                     }
                 }
             }
